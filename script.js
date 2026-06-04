@@ -420,3 +420,166 @@ document.querySelectorAll('.why-card, .testi-card, .industry-card').forEach(card
         card.style.transform = '';
     });
 });
+
+// ---- Job Filter (careers.html) ----
+const jobFilters = document.getElementById('jobFilters');
+if (jobFilters) {
+    jobFilters.addEventListener('click', (e) => {
+        const btn = e.target.closest('.job-filter-btn');
+        if (!btn) return;
+        jobFilters.querySelectorAll('.job-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.job-item').forEach(item => {
+            const match = filter === 'all' || item.dataset.category === filter;
+            item.classList.toggle('hidden', !match);
+        });
+    });
+}
+
+// ---- Blog Filter (blog.html) ----
+const blogFilters = document.getElementById('blogFilters');
+if (blogFilters) {
+    blogFilters.addEventListener('click', (e) => {
+        const btn = e.target.closest('.blog-filter-btn');
+        if (!btn) return;
+        blogFilters.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.blog-grid-item').forEach(item => {
+            const match = filter === 'all' || item.dataset.category === filter;
+            item.classList.toggle('hidden', !match);
+        });
+        const featured = document.querySelector('.blog-featured');
+        if (featured) {
+            const match = filter === 'all' || featured.dataset.category === filter;
+            featured.closest('.col-12').classList.toggle('hidden', !match);
+        }
+    });
+}
+
+// ---- Apply Modal Job Title ----
+const applyModal = document.getElementById('applyModal');
+if (applyModal) {
+    applyModal.addEventListener('show.bs.modal', (e) => {
+        const trigger = e.relatedTarget;
+        const jobTitle = trigger?.dataset?.job || '';
+        const titleEl = document.getElementById('modalJobTitle');
+        if (titleEl) titleEl.textContent = jobTitle;
+    });
+
+    const modalForm = document.getElementById('modalApplyForm');
+    if (modalForm) {
+        const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+        modalForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('mApplyName');
+            const email = document.getElementById('mApplyEmail');
+            const phone = document.getElementById('mApplyPhone');
+            const successEl = document.getElementById('mApplySuccess');
+            const errorEl = document.getElementById('mApplyError');
+
+            let valid = true;
+            [name, email, phone].forEach(el => {
+                if (el && !el.value.trim()) { el.classList.add('is-invalid'); valid = false; }
+                else if (el) el.classList.remove('is-invalid');
+            });
+            if (!valid) { errorEl?.classList.remove('d-none'); return; }
+
+            if (modalSubmitBtn) { modalSubmitBtn.disabled = true; modalSubmitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...'; }
+            await new Promise(r => setTimeout(r, 1500));
+            if (modalSubmitBtn) { modalSubmitBtn.disabled = false; modalSubmitBtn.innerHTML = '<i class="bi bi-send-fill"></i> Submit Application'; }
+            successEl?.classList.remove('d-none');
+            errorEl?.classList.add('d-none');
+            modalForm.reset();
+        });
+    }
+}
+
+// ---- General Apply Form (careers.html) ----
+const applyForm = document.getElementById('applyForm');
+if (applyForm) {
+    applyForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const requiredFields = ['applyName', 'applyEmail', 'applyPhone', 'applyArea', 'applyCover'];
+        let valid = true;
+        requiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.value.trim()) { el.classList.add('is-invalid'); valid = false; }
+            else if (el) el.classList.remove('is-invalid');
+        });
+        const successEl = document.getElementById('applySuccess');
+        const errorEl = document.getElementById('applyError');
+        const btn = document.getElementById('applySubmitBtn');
+        const btnText = btn?.querySelector('.btn-text');
+        const btnLoading = btn?.querySelector('.btn-loading');
+        if (!valid) { errorEl?.classList.remove('d-none'); return; }
+
+        if (btnText) btnText.classList.add('d-none');
+        if (btnLoading) btnLoading.classList.remove('d-none');
+        if (btn) btn.disabled = true;
+        await new Promise(r => setTimeout(r, 1500));
+        if (btnText) btnText.classList.remove('d-none');
+        if (btnLoading) btnLoading.classList.add('d-none');
+        if (btn) btn.disabled = false;
+        successEl?.classList.remove('d-none');
+        errorEl?.classList.add('d-none');
+        applyForm.reset();
+    });
+}
+
+// ---- Services sticky nav active state on scroll ----
+const svcNavPills = document.querySelectorAll('.svc-nav-pill');
+if (svcNavPills.length) {
+    const svcSections = ['infrastructure', 'hardware', 'cybersecurity', 'managed-it', 'staffing', 'cloud']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                svcNavPills.forEach(p => {
+                    p.classList.toggle('active', p.getAttribute('href') === `#${entry.target.id}`);
+                });
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    svcSections.forEach(s => observer.observe(s));
+}
+
+// ---- Pre-fill contact form service from URL params ----
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get('service');
+    const planParam = params.get('plan');
+    const serviceSelect = document.getElementById('contactService');
+
+    if (serviceSelect && serviceParam) {
+        const map = {
+            infrastructure: 'IT Infrastructure Solutions',
+            hardware: 'Hardware Supply & Procurement',
+            cybersecurity: 'Cybersecurity Services',
+            cloud: 'Cloud Migration',
+            staffing: 'IT Staffing & HR Services',
+            managed: 'Managed IT Services / AMC',
+        };
+        const val = map[serviceParam];
+        if (val) {
+            [...serviceSelect.options].forEach(opt => {
+                if (opt.text.includes(val.split(' ')[0])) serviceSelect.value = opt.value;
+            });
+        }
+    }
+
+    if (planParam) {
+        const msgEl = document.getElementById('contactMessage');
+        if (msgEl) {
+            const planMap = {
+                essential: 'I am interested in the Essential AMC Plan (up to 25 users). Please send me details.',
+                professional: 'I am interested in the Professional AMC Plan (25–100 users). Please contact me.',
+                enterprise: 'I would like a custom Enterprise AMC quote for our organization.',
+                trial: 'I would like to start the 30-day free trial of your Managed IT Services.',
+            };
+            msgEl.value = planMap[planParam] || '';
+        }
+    }
+});
