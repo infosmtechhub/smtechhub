@@ -1305,3 +1305,24 @@ img { max-width: 100%; }
 .faq-btn:not(.collapsed) { color: var(--primary-light) !important; }
 .faq-btn::after { filter: invert(1) opacity(0.4); }
 .faq-body { background: rgba(0,0,0,0.15); color: var(--text-secondary); font-size: 0.87rem; line-height: 1.8; padding: 16px 20px !important; border-top: 1px solid var(--dark-border); }
+
+/* Testimonials coming soon */
+.testi-coming-soon { background: var(--dark-card); border: 1px dashed rgba(13,110,253,0.3); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; }
+.testi-coming-soon i { font-size: 3rem; color: rgba(13,110,253,0.3); display: block; margin-bottom: 16px; }
+.testi-coming-soon h5 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.testi-coming-soon p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; max-width: 500px; margin: 0 auto; }
+.testi-coming-soon a { color: var(--primary-light); }
+
+/* About page highlight cards */
+.about-highlight-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 22px; height: 100%; transition: var(--transition); }
+.about-highlight-card:hover { transform: translateY(-3px); border-color: rgba(13,110,253,0.3); }
+.about-highlight-card i { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+.about-highlight-card h6 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+.about-highlight-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+/* Team coming soon card */
+.team-coming-soon-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius-lg); padding: 48px 40px; text-align: center; }
+.team-coming-soon-card i { font-size: 3.5rem; color: var(--primary); display: block; margin-bottom: 18px; opacity: 0.6; }
+.team-coming-soon-card h5 { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+.team-coming-soon-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; max-width: 500px; margin: 0 auto 10px; }
+.team-coming-soon-card a:not(.btn) { color: var(--primary-light); }
