@@ -242,12 +242,12 @@ function initHeroCanvas() {
             const alpha = p.alpha + Math.sin(t * p.speed + p.phase) * 0.3;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(13,110,253,${Math.max(0, alpha)})`;
+            ctx.fillStyle = `rgba(147,197,253,${Math.max(0, alpha)})`;
             ctx.fill();
         });
 
         // Draw grid lines (faint)
-        ctx.strokeStyle = 'rgba(13,110,253,0.04)';
+        ctx.strokeStyle = 'rgba(147,197,253,0.06)';
         ctx.lineWidth = 1;
         for (let i = 0; i < COLS + 1; i++) {
             ctx.beginPath();
