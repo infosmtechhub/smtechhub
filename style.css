@@ -137,9 +137,9 @@ img { max-width: 100%; }
 
 /* Actual logo image in navbar */
 .navbar-logo {
-    height: 48px;
+    height: 70px;
     width: auto;
-    max-width: 200px;
+    max-width: 260px;
     object-fit: contain;
     display: block;
 }
