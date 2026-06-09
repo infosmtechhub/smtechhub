@@ -180,16 +180,48 @@ function initContactForm() {
         if (btnLoading) btnLoading.classList.remove('d-none');
         if (submitBtn) submitBtn.disabled = true;
 
-        // Simulate async submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Collect all form data
+        const contactTime = document.querySelector('input[name="contactTime"]:checked')?.value || 'Anytime';
+        const newsletter  = document.getElementById('newsletterCheck')?.checked ? 'Yes' : 'No';
+
+        const payload = {
+            access_key: '6ad3f653-56dd-469d-a767-171eb66f9e69',
+            subject:    'New Enquiry from SMTECHHUB Website',
+            from_name:  'SMTECHHUB Website',
+            name:       document.getElementById('contactName')?.value.trim(),
+            email:      document.getElementById('contactEmail')?.value.trim(),
+            phone:      document.getElementById('contactPhone')?.value.trim(),
+            company:    document.getElementById('contactCompany')?.value.trim() || '—',
+            title:      document.getElementById('contactTitle')?.value.trim()   || '—',
+            company_size: document.getElementById('contactSize')?.value         || '—',
+            service:    document.getElementById('contactService')?.value        || '—',
+            preferred_time: contactTime,
+            newsletter: newsletter,
+            message:    document.getElementById('contactMessage')?.value.trim(),
+        };
+
+        try {
+            const res  = await fetch('https://api.web3forms.com/submit', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body:    JSON.stringify(payload)
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                successEl?.classList.remove('d-none');
+                form.reset();
+                form.querySelectorAll('.is-valid').forEach(el => el.classList.remove('is-valid'));
+            } else {
+                errorEl?.classList.remove('d-none');
+            }
+        } catch {
+            errorEl?.classList.remove('d-none');
+        }
 
         if (btnText) btnText.classList.remove('d-none');
         if (btnLoading) btnLoading.classList.add('d-none');
         if (submitBtn) submitBtn.disabled = false;
-
-        successEl?.classList.remove('d-none');
-        form.reset();
-        form.querySelectorAll('.is-valid').forEach(el => el.classList.remove('is-valid'));
     });
 
     // Real-time validation clearing
