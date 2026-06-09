@@ -222,6 +222,9 @@ img { max-width: 100%; }
     object-position: center 55%;
 }
 
+.navbar-collapse {
+    background: #fff;
+}
 .navbar-nav .nav-link {
     color: var(--text-secondary) !important;
     font-size: 0.86rem;
@@ -1085,6 +1088,9 @@ img { max-width: 100%; }
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+/* ============================================================
+   TABLET (≤991px)
+   ============================================================ */
 @media (max-width: 991px) {
     #mainNavbar { background: #fff !important; }
     .mega-menu { width: 100% !important; left: 0 !important; transform: none !important; }
@@ -1099,15 +1105,117 @@ img { max-width: 100%; }
     .newsletter-card { padding: 24px; }
     .hardware-brands-grid { grid-template-columns: 1fr; }
     .cloud-stats-visual { grid-template-columns: 1fr; }
+
+    /* Navbar logo tablet */
+    .navbar-logo { width: 160px; height: 52px; }
+
+    /* Footer */
+    .footer-top { padding: 50px 0 30px; }
 }
+
+/* ============================================================
+   MOBILE (≤767px)
+   ============================================================ */
 @media (max-width: 767px) {
-    .section-pad { padding: 60px 0; }
-    .hero-badge { font-size: 0.72rem; }
-    .hcard { font-size: 0.72rem; padding: 8px 12px; }
+    /* Global */
+    .section-pad { padding: 50px 0; }
     .topbar { display: none; }
-    .min-vh-hero { padding: 100px 0 60px; }
+
+    /* Navbar */
+    #mainNavbar { padding: 6px 0; }
+    .navbar-logo { width: 130px; height: 44px; }
+    .navbar-toggler { padding: 4px 8px; }
+    .nav-cta { margin: 8px 14px !important; display: flex !important; justify-content: center; }
+
+    /* Hero */
+    .hero-section { min-height: auto; padding: 100px 0 60px; }
+    .hero-title { font-size: 2rem !important; }
+    .hero-subtitle { font-size: 0.9rem; }
+    .hero-badge { font-size: 0.72rem; }
+    .hero-stats { gap: 14px; }
+    .hero-cta { flex-direction: column; gap: 10px; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    .hcard { font-size: 0.72rem; padding: 8px 12px; }
+
+    /* Page hero (inner pages) */
+    .page-hero { padding: 80px 0 40px; }
+    .page-hero-title { font-size: 1.8rem; }
+    .page-hero-subtitle { font-size: 0.88rem; }
+
+    /* Section titles */
+    .section-title { font-size: 1.6rem; }
+
+    /* Preloader */
+    .preloader-logo-img { width: 200px; height: 65px; }
+    .preloader-bar { width: 180px; }
+    .preloader-welcome { font-size: 0.72rem; letter-spacing: 1.5px; }
+
+    /* Cards */
+    .why-card { padding: 22px 18px; }
+    .perk-card { padding: 22px 18px; }
+    .noc-card  { padding: 20px 16px; }
+    .blog-card { margin-bottom: 4px; }
+
+    /* Blog featured */
+    .blog-featured-content { padding: 24px 20px; }
+    .blog-featured-content h2 { font-size: 1.2rem; }
+
+    /* AMC pricing */
+    .amc-card { padding: 24px 18px; }
+    .price-amount { font-size: 2.2rem; }
+
+    /* SLA table */
+    .sla-table { font-size: 0.78rem; }
+    .sla-table thead th,
+    .sla-table tbody td { padding: 10px 10px; }
+
+    /* Contact */
+    .contact-form-card { padding: 20px 16px; }
+    .contact-channel-card { padding: 18px 14px; }
+    .office-card { padding: 20px 16px; }
+
+    /* Footer */
+    .footer-top { padding: 40px 0 20px; }
+    .footer-logo { width: 160px; height: 50px; }
+    .footer-bottom { text-align: center; font-size: 0.78rem; }
+    .footer-heading { margin-top: 10px; }
+
+    /* Job cards */
+    .job-card { padding: 18px 16px; }
+    .job-meta { gap: 8px; }
+
+    /* Client cards */
+    .client-card { padding: 20px 14px; }
+
+    /* Filter buttons */
+    .job-filter-btn, .blog-filter-btn { font-size: 0.76rem; padding: 6px 12px; }
+
+    /* Managed benefits */
+    .managed-benefit { flex-direction: column; gap: 4px; }
+
+    /* Apply card */
+    .apply-card { padding: 20px 16px; }
     .team-coming-soon-card { padding: 32px 20px; }
-    .apply-card { padding: 24px; }
+
+    /* Misc */
+    .min-vh-hero { padding: 100px 0 60px; }
+    .ticker-wrap { display: none; }
+}
+
+/* ============================================================
+   SMALL MOBILE (≤480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    .hero-title { font-size: 1.7rem !important; }
+    .page-hero-title { font-size: 1.5rem; }
+    .section-title { font-size: 1.4rem; }
+    .navbar-logo { width: 110px; height: 38px; }
+    .preloader-logo-img { width: 160px; height: 52px; }
+    .btn-primary, .btn-outline-light { font-size: 0.82rem; padding: 9px 16px; }
+    .amc-card { padding: 20px 14px; }
+    .price-amount { font-size: 2rem; }
+    .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .footer-logo { width: 140px; height: 44px; }
 }
 
 /* ============================================================
