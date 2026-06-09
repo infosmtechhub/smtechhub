@@ -647,13 +647,15 @@ img { max-width: 100%; }
 .footer-brand .brand-tech { color: #fff; }
 .footer-brand .brand-tagline { color: rgba(255,255,255,0.4); }
 .footer-logo {
-    width: 220px;
-    height: 70px;
+    width: 200px;
+    height: 65px;
     object-fit: cover;
     object-position: center 55%;
-    filter: brightness(0) invert(1);
-    opacity: 0.95;
     display: block;
+    border-radius: 10px;
+    background: #fff;
+    padding: 6px 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
 .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 300px; margin-bottom: 20px; }
 .footer-social { display: flex; gap: 10px; }
