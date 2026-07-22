@@ -524,20 +524,17 @@ if (applyModal) {
             successEl?.classList.add('d-none');
 
             const formData = new FormData();
-            formData.append('access_key', '6ad3f653-56dd-469d-a767-171eb66f9e69');
-            formData.append('subject', `New Job Application: ${document.getElementById('modalJobTitle')?.textContent || 'General'}`);
-            formData.append('from_name', 'SMTECHHUB Careers');
-            formData.append('job_title', document.getElementById('modalJobTitle')?.textContent || '—');
+            formData.append('job_title', document.getElementById('modalJobTitle')?.textContent || '');
             formData.append('name', name?.value.trim());
             formData.append('email', email?.value.trim());
             formData.append('phone', phone?.value.trim());
-            formData.append('linkedin', document.getElementById('mApplyLinkedin')?.value.trim() || '—');
-            formData.append('why_join', document.getElementById('mApplyWhy')?.value.trim() || '—');
+            formData.append('linkedin', document.getElementById('mApplyLinkedin')?.value.trim() || '');
+            formData.append('why_join', document.getElementById('mApplyWhy')?.value.trim() || '');
             const resumeFile = resume?.files?.[0];
-            if (resumeFile) formData.append('attachment', resumeFile);
+            if (resumeFile) formData.append('resume', resumeFile);
 
             try {
-                const res  = await fetch('https://api.web3forms.com/submit', {
+                const res  = await fetch('/api/apply', {
                     method:  'POST',
                     headers: { 'Accept': 'application/json' },
                     body:    formData
@@ -585,21 +582,18 @@ if (applyForm) {
         successEl?.classList.add('d-none');
 
         const formData = new FormData();
-        formData.append('access_key', '6ad3f653-56dd-469d-a767-171eb66f9e69');
-        formData.append('subject', 'New Job Application from SMTECHHUB Careers Page');
-        formData.append('from_name', 'SMTECHHUB Careers');
         formData.append('name', document.getElementById('applyName')?.value.trim());
         formData.append('email', document.getElementById('applyEmail')?.value.trim());
         formData.append('phone', document.getElementById('applyPhone')?.value.trim());
-        formData.append('experience', document.getElementById('applyExp')?.value || '—');
-        formData.append('area_of_expertise', document.getElementById('applyArea')?.value);
-        formData.append('certifications', document.getElementById('applyCerts')?.value.trim() || '—');
+        formData.append('experience', document.getElementById('applyExp')?.value || '');
+        formData.append('area_of_expertise', document.getElementById('applyArea')?.value || '');
+        formData.append('certifications', document.getElementById('applyCerts')?.value.trim() || '');
         formData.append('cover_note', document.getElementById('applyCover')?.value.trim());
         const resumeFile = document.getElementById('applyResume')?.files?.[0];
-        if (resumeFile) formData.append('attachment', resumeFile);
+        if (resumeFile) formData.append('resume', resumeFile);
 
         try {
-            const res  = await fetch('https://api.web3forms.com/submit', {
+            const res  = await fetch('/api/apply', {
                 method:  'POST',
                 headers: { 'Accept': 'application/json' },
                 body:    formData
